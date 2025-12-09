@@ -172,3 +172,26 @@ function calculateInvestmentPlan(currentAssets, targetAssets, annualReturn = 0.0
 
   return years;
 }
+function drawRadarChart(data) {
+  const ctx = document.getElementById("radarChart").getContext("2d");
+
+  new Chart(ctx, {
+    type: "radar",
+    data: {
+      labels: ["운동", "수면", "스트레스", "주식비중", "총자산 안정도"],
+      datasets: [{
+        label: "리스크 프로파일",
+        data: [
+          data.exercise,
+          data.sleep,
+          10 - data.stress,
+          (data.stocks / data.totalAssets) * 10,
+          Math.min(10, data.totalAssets / 100000)
+        ],
+        backgroundColor: "rgba(14,165,233,0.3)",
+        borderColor: "#0ea5e9",
+        pointBackgroundColor: "#38bdf8"
+      }]
+    }
+  });
+}
