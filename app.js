@@ -120,6 +120,9 @@ function drawAssetPieChart(data) {
 function loadRiskTrend() {
   const user = firebase.auth().currentUser;
   if (!user) return;
+  const pred = predictNextYearRisk(scores);
+  document.getElementById("predictRisk").innerText = `예상 점수: ${pred}`;
+
 
   db.collection("users")
     .doc(user.uid)
@@ -196,4 +199,15 @@ function drawRadarChart(data) {
       }]
     }
   });
+}
+function predictNextYearRisk(scores) {
+  if (scores.length < 3) return "데이터 부족";
+
+  const last = scores[scores.length - 1];
+  const prev = scores[scores.length - 3];
+
+  const trend = (last - prev) / 3;
+  const predicted = last + (trend * 12);
+
+  return Math.round(Math.max(1, Math.min(predicted, 100)));
 }
