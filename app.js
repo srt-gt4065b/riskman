@@ -71,37 +71,68 @@ function calculateRiskScore(stocks, total, exercise, sleep, stress) {
   return Math.max(1, Math.min(100, Math.round(score)));
 }
 
-// Load dashboard data
-function loadDashboard() {
-  const user = firebase.auth().currentUser;
-  if (!user) return;
+async function loadDashboard() {
+    const user = firebase.auth().currentUser;
+    if (!user) {
+        console.log("로그인 필요");
+        return;
+    }
 
-  db.collection("users")
-    .doc(user.uid)
-    .collection("months")
-    .orderBy("savedAt", "desc")
-    .limit(1)
-    .get()
-    .then((snap) => {
-      if (snap.empty) return;
+    console.log("로그인 사용자:", user.uid);
 
-      const data = snap.docs[0].data();
+    // 🔥 1) savedAt 대신 ym(yyyy-mm 문자열) 기준으로 최신월을 로드
+    const snap = await db
+        .collection("users")
+        .doc(user.uid)
+        .collection("months")
+        .orderBy("ym", "desc")   // 문자열 정렬만으로 최신순 OK
+        .limit(1)
+        .get();
 
-      document.getElementById("totalAssets").innerText = data.totalAssets.toLocaleString();
-      document.getElementById("riskScore").innerText = data.riskScore;
-      document.getElementById("exerciseDays").innerText = data.exercise;
-      document.getElementById("riskMessage").innerText = getRiskMessage(data.riskScore);
+    if (snap.empty) {
+        console.log("월간 데이터 없음");
+        return;
+    }
 
-      const target = 150000;  // 예) 목표 15억
-      const yearsNeeded = calculateInvestmentPlan(data.totalAssets, target);
-      document.getElementById("goalSim").innerText =
-      `목표 자산 ${target.toLocaleString()}만원까지 약 ${yearsNeeded}년 예상`;
+    const data = snap.docs[0].data();
 
-      drawAssetPieChart(data);
-      drawRadarChart(data);
+    // 🔥 2) 기본 데이터 표시
+    document.getElementById("totalAssets").innerText =
+        data.totalAssets ? data.totalAssets.toLocaleString() : "-";
 
+    document.getElementById("riskScore").innerText =
+        data.riskScore ?? "-";
+
+    document.getElementById("exerciseDays").innerText =
+        data.exercise ?? "-";
+
+    // 🔥 3) 리스크 메시지
+    document.getElementById("riskMessage").innerText =
+        getRiskMessage(data.riskScore);
+
+    // 🔥 4) 목표 자산 시뮬레이션
+    const targetAsset = data.totalAssets * 1.2; // 예: 20% 성장 목표
+    document.getElementById("goalSim").innerText =
+        `현재 자산 대비 20% 증가 목표는 ${targetAsset.toLocaleString()}원입니다.`;
+
+    // 🔥 5) 자산 차트
+    drawAssetPieChart({
+        realestate: data.realestate,
+        stocks: data.stocks,
+        cash: data.cash,
+        other: data.other
     });
+
+    // 🔥 6) 레이더 차트
+    drawRadarChart({
+        exercise: data.exercise,
+        sleep: data.sleep,
+        stress: data.stress
+    });
+
+    console.log("대시보드 로딩 완료:", data);
 }
+
 
 // Chart.js Pie Chart
 function drawAssetPieChart(data) {
