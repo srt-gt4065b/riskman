@@ -172,3 +172,51 @@ function drawAssetChart() {
     }
   });
 }
+
+// ----------------------------------
+// 9) 월별 리스크 점수 라인 차트
+// ----------------------------------
+function drawLineChart(uid) {
+  const monthsRef = db.collection("users").doc(uid).collection("months");
+
+  monthsRef.orderBy("savedAt", "asc").get()
+    .then((snapshot) => {
+      const labels = [];
+      const values = [];
+
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const scores = calculateScores(data);
+
+        labels.push(doc.id);  // YYYY-MM
+        values.push(scores.total);
+      });
+
+      const ctx = document.getElementById("lineChart").getContext("2d");
+
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "리스크 점수",
+            data: values,
+            borderColor: "#00E5FF",
+            backgroundColor: "rgba(0, 229, 255, 0.3)",
+            borderWidth: 2,
+            pointRadius: 4,
+            tension: 0.2
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              min: 0,
+              max: 100,
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    });
+}
