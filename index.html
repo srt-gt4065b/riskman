@@ -19,7 +19,10 @@
     messagingSenderId: "268232529278",
     appId: "1:268232529278:web:395eef60f64298915d4f2f"
   };
-    firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
+
+  const auth = firebase.auth();
+  const db = firebase.firestore();
 </script>
 
 <!-- Firebase 설정 -->
