@@ -1,81 +1,81 @@
-// ------------------------------
-// Firebase Auth 초기화
-// ------------------------------
-const provider = new firebase.auth.GoogleAuthProvider();
+// ---------------------------
+// Firebase Authentication Logic
+// ---------------------------
 
-// 로그인 상태 감시
-firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    console.log("로그인됨:", user.email);
-  } else {
-    console.log("로그아웃 상태");
+// 이메일 로그인
+function loginEmail() {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  if (!email || !password) {
+    alert("이메일과 비밀번호를 입력해주세요.");
+    return;
   }
-});
 
-// ------------------------------
-// 1) Google 로그인
-// ------------------------------
-function loginWithGoogle() {
-  firebase.auth().signInWithPopup(provider)
-    .then((result) => {
-      console.log("Google 로그인 성공:", result.user.email);
+  firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(() => {
       window.location.href = "dashboard.html";
     })
-    .catch((error) => {
+    .catch(error => {
       alert("로그인 실패: " + error.message);
     });
 }
 
-// ------------------------------
-// 2) Email 회원가입
-// ------------------------------
+// 회원가입
 function signUpEmail() {
-  const email = document.getElementById("email").value;
-  const pass = document.getElementById("password").value;
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
 
-  firebase.auth().createUserWithEmailAndPassword(email, pass)
-    .then((userCredential) => {
-      alert("회원가입 완료!");
+  if (!email || !password) {
+    alert("이메일과 비밀번호를 입력해주세요.");
+    return;
+  }
+
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(userCredential => {
+      const user = userCredential.user;
+
+      // Firestore에 기본 profile 문서 생성
+      db.collection("users").doc(user.uid).collection("profile").doc("info").set({
+        createdAt: new Date(),
+        email: user.email
+      });
+
+      alert("회원가입 성공! 자동 로그인됩니다.");
       window.location.href = "dashboard.html";
     })
-    .catch((error) => {
-      alert("회원가입 오류: " + error.message);
+    .catch(error => {
+      alert("회원가입 실패: " + error.message);
     });
 }
 
-// ------------------------------
-// 3) Email 로그인
-// ------------------------------
-function loginEmail() {
-  const email = document.getElementById("email").value;
-  const pass = document.getElementById("password").value;
+// Google 로그인
+function loginWithGoogle() {
+  const provider = new firebase.auth.GoogleAuthProvider();
 
-  firebase.auth().signInWithEmailAndPassword(email, pass)
-    .then((userCredential) => {
+  firebase.auth().signInWithPopup(provider)
+    .then(() => {
       window.location.href = "dashboard.html";
     })
-    .catch((error) => {
-      alert("로그인 오류: " + error.message);
+    .catch(error => {
+      alert("구글 로그인 실패: " + error.message);
     });
 }
 
-// ------------------------------
-// 4) 로그아웃
-// ------------------------------
-function logout() {
+// 로그아웃
+function logoutUser() {
   firebase.auth().signOut().then(() => {
     window.location.href = "index.html";
   });
 }
 
-// ------------------------------
-// 5) 보호 페이지 접근 제한
-// ------------------------------
-function requireLogin() {
-  firebase.auth().onAuthStateChanged((user) => {
-    if (!user) {
-      alert("로그인이 필요합니다.");
-      window.location.href = "index.html";
-    }
-  });
-}
+// 인증 상태 확인 (보안)
+firebase.auth().onAuthStateChanged(user => {
+  const securePages = ["dashboard.html", "input.html"];
+
+  const currentPage = window.location.pathname.split("/").pop();
+
+  if (!user && securePages.includes(currentPage)) {
+    window.location.href = "index.html"; 
+  }
+});
