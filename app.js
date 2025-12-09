@@ -100,11 +100,13 @@ function loadDashboardData() {
         const data = snapshot.docs[0].data();
         console.log("대시보드 데이터:", data);
 
-        // TODO: 여기서 카드 UI 업데이트 / 파이차트 데이터 반영
-        updateDashboardUI(data);
+        updateDashboardUI(data);   // UI 업데이트
       });
+
+    drawLineChart(user.uid);       // ★ then() 블록 바깥에서 호출
   });
 }
+
 
 // ------------------------------------------
 // 5) 대시보드 업데이트 함수 기본 틀
