@@ -245,3 +245,12 @@ function predictNextYearRisk(scores) {
 
   return Math.round(Math.max(1, Math.min(predicted, 100)));
 }
+
+// 대시보드 데이터 불러온 후 차트 실행
+firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+        loadDashboard();
+        loadRiskTrend();   // ✔ 데이터를 다 불러온 후 실행됨
+    }
+});
+
