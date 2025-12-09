@@ -254,9 +254,10 @@ function drawRadarChart(data) {
           (data.stocks / data.totalAssets) * 10,
           Math.min(10, data.totalAssets / 100000)
         ],
-        backgroundColor: "rgba(14,165,233,0.3)",
-        borderColor: "#0ea5e9",
-        pointBackgroundColor: "#38bdf8"
+        borderColor: "rgba(255,99,132,0.8)",
+        backgroundColor: "rgba(255,99,132,0.25)",
+        pointBackgroundColor: "#fff",
+
       }]
     }
   });
