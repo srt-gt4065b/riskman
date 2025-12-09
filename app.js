@@ -95,6 +95,8 @@ function loadDashboard() {
       `목표 자산 ${target.toLocaleString()}만원까지 약 ${yearsNeeded}년 예상`;
 
       drawAssetPieChart(data);
+      drawRadarChart(data);
+
     });
 }
 
