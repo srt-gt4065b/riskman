@@ -2,9 +2,9 @@
 // RiskMan – Firestore Logic (완성본)
 // -----------------------------------------
 
-// Save monthly data
-function saveMonthlyData() {
-  const user = firebase.auth().currentUser;
+// ========== 월 데이터 저장 ==========
+async function submitMonthlyForm() {
+  const user = auth.currentUser;
   if (!user) {
     alert("로그인이 필요합니다.");
     return;
@@ -26,28 +26,31 @@ function saveMonthlyData() {
 
   const riskScore = calculateRiskScore(stocks, totalAssets, exercise, sleep, stress);
 
-  db.collection("users")
-    .doc(user.uid)
-    .collection("months")
-    .doc(ym)
-    .set({
-      ym: ym,
-      realestate,
-      stocks,
-      cash,
-      other,
-      totalAssets,
-      exercise,
-      sleep,
-      stress,
-      riskScore,
-      savedAt: new Date()
-    })
-    .then(() => {
-      alert("저장되었습니다!");
-      window.location.href = "dashboard.html";
-    })
-    .catch((err) => alert("저장 오류: " + err.message));
+  try {
+    await setDoc(
+      doc(db, "users", user.uid, "months", ym),
+      {
+        ym,
+        realestate,
+        stocks,
+        cash,
+        other,
+        totalAssets,
+        exercise,
+        sleep,
+        stress,
+        riskScore,
+        savedAt: new Date()
+      }
+    );
+
+    alert("저장되었습니다!");
+    window.location.href = "dashboard.html";
+
+  } catch (err) {
+    console.error("저장 오류:", err);
+    alert("저장 오류: " + err.message);
+  }
 }
 
 // Risk calculation
