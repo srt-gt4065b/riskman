@@ -1,94 +1,58 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Risk Dashboard</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>리스크 대시보드</title>
 
-<!-- Firebase v8 SDK (GitHub Pages에서 완전 호환됨) -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <link rel="stylesheet" href="style.css" />
 
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyCtEQ0vzqnwqMi333dVuZRTVJkTRd_Ho_s",
-    authDomain: "riskman-b5eeb.firebaseapp.com",
-    projectId: "riskman-b5eeb",
-    storageBucket: "riskman-b5eeb.firebasestorage.app",
-    messagingSenderId: "268232529278",
-    appId: "1:268232529278:web:395eef60f64298915d4f2f"
-  };
-  firebase.initializeApp(firebaseConfig);
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-  const auth = firebase.auth();
-  const db = firebase.firestore();
-</script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<link rel="stylesheet" href="style.css">
+    <script src="config.js"></script>
+    <script src="auth.js"></script>
+    <script src="app.js"></script>
 </head>
 
-<body class="dark" onload="loadDashboardData();">
+<body onload="loadDashboard()">
 
-<div class="dashboard-container">
+<div class="page-container">
+    <h1 class="title">📊 Risk Manager Dashboard</h1>
 
-    <div class="header">
-        <h1 class="title">AI RISK DASHBOARD</h1>
-        <button class="logout-btn" onclick="logout()">로그아웃</button>
+    <div class="btn-group">
+        <button class="btn" onclick="window.location.href='input.html'">➕ 월 데이터 입력</button>
+        <button class="btn danger" onclick="logoutUser()">로그아웃</button>
     </div>
 
-    <!-- 종합 점수 영역 -->
-    <div class="score-box">
-        <h2>종합 리스크 점수</h2>
-        <p class="total-score" id="totalScore">--</p>
-    </div>
-
-    <!-- 카드 5개 -->
-    <div class="card-grid">
+    <div class="cards">
 
         <div class="card">
-            <h3>포트폴리오 리스크</h3>
-            <p id="marketScore">--</p>
+            <h3>총 자산</h3>
+            <p id="totalAssets" class="value">-</p>
         </div>
 
         <div class="card">
-            <h3>재정 건전성</h3>
-            <p id="financeScore">--</p>
+            <h3>리스크 점수</h3>
+            <p id="riskScore" class="value">-</p>
         </div>
 
         <div class="card">
-            <h3>건강 상태</h3>
-            <p id="healthScore">--</p>
-        </div>
-
-        <div class="card">
-            <h3>운동량</h3>
-            <p id="runScore">--</p>
-        </div>
-
-        <div class="card">
-            <h3>변동성 경고</h3>
-            <p id="alertText">--</p>
+            <h3>운동 일수</h3>
+            <p id="exerciseDays" class="value">-</p>
         </div>
 
     </div>
 
-    <!-- 자산 배분 차트 -->
-    <h2 class="section-title">자산 배분</h2>
-    <canvas id="assetChart"></canvas>
+    <h2>💼 자산 포트폴리오</h2>
 
-    <!-- 월별 트렌트 라인차트 -->
-    <h2 class="section-title">월별 리스크 점수 변화</h2>
-    <canvas id="lineChart"></canvas>
-
+    <canvas id="assetChart" width="350" height="350"></canvas>
 </div>
-
-<script src="auth.js"></script>
-<script src="app.js"></script>
 
 </body>
 </html>
