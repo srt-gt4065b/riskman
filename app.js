@@ -136,21 +136,48 @@ async function loadDashboard() {
 
 // Chart.js Pie Chart
 function drawAssetPieChart(data) {
-  const ctx = document.getElementById("assetChart").getContext("2d");
+    const ctx = document.getElementById("assetChart").getContext("2d");
 
-  new Chart(ctx, {
-    type: "pie",
-    data: {
-      labels: ["부동산", "주식", "현금", "기타"],
-      datasets: [
-        {
-          data: [data.realestate, data.stocks, data.cash, data.other],
-          backgroundColor: ["#4FC3F7", "#29B6F6", "#0288D1", "#0277BD"],
-        },
-      ],
+    if (window.assetChartInstance) {
+        window.assetChartInstance.destroy();
     }
-  });
+
+    window.assetChartInstance = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: ["부동산", "주식", "현금", "기타"],
+            datasets: [{
+                data: [
+                    data.realestate,
+                    data.stocks,
+                    data.cash,
+                    data.other
+                ],
+                backgroundColor: [
+                    "#4e79a7",  // 부동산
+                    "#f28e2b",  // 주식
+                    "#e15759",  // 현금
+                    "#76b7b2"   // 기타
+                ],
+                borderWidth: 2,
+                borderColor: "#ffffff"
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: "bottom",
+                    labels: {
+                        color: "#fff",
+                        font: { size: 14 }
+                    }
+                }
+            }
+        }
+    });
 }
+
 function loadRiskTrend() {
   const user = firebase.auth().currentUser;
   if (!user) return;
