@@ -89,6 +89,10 @@ function loadDashboard() {
       document.getElementById("exerciseDays").innerText = data.exercise;
       document.getElementById("riskMessage").innerText = getRiskMessage(data.riskScore);
 
+      const target = 150000;  // 예) 목표 15억
+      const yearsNeeded = calculateInvestmentPlan(data.totalAssets, target);
+      document.getElementById("goalSim").innerText =
+      `목표 자산 ${target.toLocaleString()}만원까지 약 ${yearsNeeded}년 예상`;
 
       drawAssetPieChart(data);
     });
