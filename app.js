@@ -109,3 +109,42 @@ function drawAssetPieChart(data) {
     }
   });
 }
+function loadRiskTrend() {
+  const user = firebase.auth().currentUser;
+  if (!user) return;
+
+  db.collection("users")
+    .doc(user.uid)
+    .collection("months")
+    .orderBy("ym", "asc")
+    .get()
+    .then(snap => {
+      const labels = [];
+      const scores = [];
+
+      snap.forEach(doc => {
+        labels.push(doc.id);
+        scores.push(doc.data().riskScore);
+      });
+
+      drawRiskLineChart(labels, scores);
+    });
+}
+
+function drawRiskLineChart(labels, scores) {
+  const ctx = document.getElementById("riskTrendChart").getContext("2d");
+
+  new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [{
+        label: "월별 리스크 점수",
+        data: scores,
+        borderColor: "#3b82f6",
+        backgroundColor: "rgba(59,130,246,0.3)",
+        tension: 0.3
+      }]
+    }
+  });
+}
