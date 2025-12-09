@@ -1,145 +1,122 @@
-body.dark {
-    background: #0A0A0F;
-    color: #EAEAEA;
-    font-family: 'Pretendard', sans-serif;
+/* 전체 페이지 공통 */
+body {
     margin: 0;
+    padding: 0;
+    background: #0f172a;
+    font-family: 'Pretendard', sans-serif;
+    color: #e2e8f0;
 }
 
-.login-container {
+.page-container {
     width: 90%;
-    max-width: 360px;
-    margin: 80px auto;
-    text-align: center;
-}
-
-.title {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    color: #00E5FF;
-    text-shadow: 0 0 8px #00E5FF;
-}
-
-.subtitle {
-    font-size: 0.9rem;
-    margin-bottom: 25px;
-    color: #7f8fa6;
-}
-
-.card {
-    background: #111118;
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid #22222A;
-    margin-bottom: 20px;
-}
-
-.input-dark {
-    width: 100%;
-    padding: 10px;
-    margin-top: 8px;
-    background: #1a1a22;
-    border: none;
-    border-radius: 8px;
-    color: white;
-}
-
-.btn {
-    width: 100%;
-    margin-top: 12px;
-    padding: 10px;
-    background: #00E5FF;
-    color: black;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-}
-
-.btn-outline {
-    width: 100%;
-    margin-top: 10px;
-    padding: 10px;
-    background: transparent;
-    color: #00E5FF;
-    border: 1px solid #00E5FF;
-    border-radius: 8px;
-}
-
-.btn-google {
-    width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-    background: #ffffff;
-    color: #000;
-    border-radius: 8px;
-}
-
-.or-text {
-    margin: 12px 0;
-    color: #7f8fa6;
-}
-
-.dashboard-container {
-    width: 95%;
-    max-width: 900px;
+    max-width: 480px;
     margin: 30px auto;
     text-align: center;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.title {
+    color: #60a5fa;
+    font-size: 26px;
+    margin-bottom: 20px;
 }
 
-.logout-btn {
-    background: #00E5FF;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 6px;
+/* 버튼 */
+.btn {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 12px 15px;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    margin: 5px;
+    width: 45%;
     cursor: pointer;
 }
 
-.score-box {
-    margin: 25px 0;
-    background: #111118;
-    padding: 20px;
-    border-radius: 12px;
+.btn:hover {
+    background: #334155;
 }
 
-.total-score {
-    font-size: 3rem;
-    color: #00E5FF;
-    text-shadow: 0 0 12px #00E5FF;
+.btn.primary {
+    background: #3b82f6;
+    border: none;
+    color: white;
 }
 
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+.btn.primary:hover {
+    background: #2563eb;
+}
+
+.btn.danger {
+    background: #ef4444;
+    border: none;
+    color: white;
+}
+
+.btn.danger:hover {
+    background: #dc2626;
+}
+
+.btn.google {
+    background: #ffffff;
+    color: #111827;
+    width: 80%;
+    margin-top: 10px;
+}
+
+/* 입력 폼 */
+input {
+    width: 85%;
+    padding: 12px;
+    margin: 8px 0;
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: white;
+    border-radius: 10px;
+}
+
+/* 카드 디자인 */
+.cards {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .card {
-    background: #111118;
-    padding: 15px;
+    width: 30%;
+    background: #1e293b;
+    padding: 18px 10px;
     border-radius: 12px;
-    border: 1px solid #1f1f29;
+    border: 1px solid #334155;
 }
 
-.section-title {
-    margin-top: 40px;
-    color: #00E5FF;
+.card h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #93c5fd;
 }
 
-.input-container {
+.value {
+    font-size: 22px;
+    font-weight: bold;
+    color: #facc15;
+}
+
+/* 로그인 화면 전용 */
+.login-container {
     width: 90%;
-    max-width: 400px;
-    margin: 40px auto;
+    max-width: 420px;
+    margin: 80px auto;
+    text-align: center;
 }
 
-label {
-    text-align: left;
-    display: block;
+.input-group input {
+    width: 90%;
+}
+
+/* 구분선 */
+.divider {
     margin-top: 15px;
-    margin-bottom: 5px;
-    color: #00E5FF;
+    margin-bottom: 15px;
+    color: #64748b;
+    font-size: 14px;
 }
