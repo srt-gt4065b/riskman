@@ -130,3 +130,16 @@ body.dark {
     color: #00E5FF;
 }
 
+.input-container {
+    width: 90%;
+    max-width: 400px;
+    margin: 40px auto;
+}
+
+label {
+    text-align: left;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #00E5FF;
+}
