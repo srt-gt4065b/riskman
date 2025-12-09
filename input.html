@@ -5,12 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>월간 리스크 입력</title>
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<!-- Firebase v8 SDK (GitHub Pages 호환) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-<script src="firebase.js"></script>
+<!-- ❌ 문제의 firebase.js 삭제됨 -->
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCtEQ0vzqnwqMi333dVuZRTVJkTRd_Ho_s",
+    authDomain: "riskman-b5eeb.firebaseapp.com",
+    projectId: "riskman-b5eeb",
+    storageBucket: "riskman-b5eeb.firebasestorage.app",
+    messagingSenderId: "268232529278",
+    appId: "1:268232529278:web:395eef60f64298915d4f2f"
+  };
+
+  // Firebase 초기화 (필수!!)
+  firebase.initializeApp(firebaseConfig);
+
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+</script>
 
 <link rel="stylesheet" href="style.css">
 </head>
