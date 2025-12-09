@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>월간 리스크 입력</title>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<script src="firebase.js"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dark" onload="requireLogin();">
+
+<div class="input-container">
+
+    <h1 class="title">월간 리스크 입력</h1>
+
+    <div class="card">
+
+        <label>테슬라 투자 비중 (%)</label>
+        <input id="tesla" class="input-dark" type="number" placeholder="예: 80">
+
+        <label>월 여유자금 (만원)</label>
+        <input id="freeCash" class="input-dark" type="number" placeholder="예: 120">
+
+        <label>건강 상태</label>
+        <select id="health" class="input-dark">
+            <option value="좋음">좋음</option>
+            <option value="보통">보통</option>
+            <option value="나쁨">나쁨</option>
+        </select>
+
+        <label>이달의 러닝 거리 (km)</label>
+        <input id="runKm" class="input-dark" type="number" placeholder="예: 32">
+
+        <button class="btn" onclick="submitMonthlyForm()">입력 저장</button>
+
+        <button class="btn-outline" onclick="location.href='dashboard.html'">
+            대시보드로 돌아가기
+        </button>
+
+    </div>
+</div>
+
+<script src="auth.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
