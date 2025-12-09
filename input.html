@@ -1,72 +1,43 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>월간 리스크 입력</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>월 리스크 입력</title>
 
-<!-- Firebase v8 SDK (GitHub Pages 호환) -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <link rel="stylesheet" href="style.css" />
 
-<!-- ❌ 문제의 firebase.js 삭제됨 -->
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyCtEQ0vzqnwqMi333dVuZRTVJkTRd_Ho_s",
-    authDomain: "riskman-b5eeb.firebaseapp.com",
-    projectId: "riskman-b5eeb",
-    storageBucket: "riskman-b5eeb.firebasestorage.app",
-    messagingSenderId: "268232529278",
-    appId: "1:268232529278:web:395eef60f64298915d4f2f"
-  };
-
-  // Firebase 초기화 (필수!!)
-  firebase.initializeApp(firebaseConfig);
-
-  const auth = firebase.auth();
-  const db = firebase.firestore();
-</script>
-
-<link rel="stylesheet" href="style.css">
+    <script src="config.js"></script>
+    <script src="auth.js"></script>
+    <script src="app.js" defer></script>
 </head>
 
-<body class="dark" onload="requireLogin();">
+<body>
+<div class="page-container">
+    <h2>📊 월 리스크 입력</h2>
 
-<div class="input-container">
-
-    <h1 class="title">월간 리스크 입력</h1>
-
-    <div class="card">
-
-        <label>테슬라 투자 비중 (%)</label>
-        <input id="tesla" class="input-dark" type="number" placeholder="예: 80">
-
-        <label>월 여유자금 (만원)</label>
-        <input id="freeCash" class="input-dark" type="number" placeholder="예: 120">
-
-        <label>건강 상태</label>
-        <select id="health" class="input-dark">
-            <option value="좋음">좋음</option>
-            <option value="보통">보통</option>
-            <option value="나쁨">나쁨</option>
-        </select>
-
-        <label>이달의 러닝 거리 (km)</label>
-        <input id="runKm" class="input-dark" type="number" placeholder="예: 32">
-
-        <button class="btn" onclick="submitMonthlyForm()">입력 저장</button>
-
-        <button class="btn-outline" onclick="location.href='dashboard.html'">
-            대시보드로 돌아가기
-        </button>
-
+    <div class="form-section">
+        <h3>💰 자산 정보</h3>
+        <input type="number" id="realestate" placeholder="부동산 평가액 (만원)" />
+        <input type="number" id="stocks" placeholder="주식 평가액 (만원)" />
+        <input type="number" id="cash" placeholder="현금/예금 (만원)" />
+        <input type="number" id="other" placeholder="기타 자산 (만원)" />
     </div>
-</div>
 
-<script src="auth.js"></script>
-<script src="app.js"></script>
+    <div class="form-section">
+        <h3>🏃 건강/생활</h3>
+        <input type="number" id="exercise" placeholder="운동 일수(월간)" />
+        <input type="number" id="sleep" placeholder="평균 수면 시간" />
+        <input type="number" id="stress" placeholder="스트레스 (1~10)" />
+    </div>
+
+    <button class="btn primary" onclick="saveMonthlyData()">저장하기</button>
+</div>
 
 </body>
 </html>
