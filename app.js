@@ -157,3 +157,14 @@ function getRiskMessage(score) {
   if (score < 85) return "리스크가 높습니다. 주식 비중이 과도할 수 있습니다.";
   return "⚠️ 매우 높은 리스크입니다! 즉각적인 자산 구조 조정이 필요합니다.";
 }
+function calculateInvestmentPlan(currentAssets, targetAssets, annualReturn = 0.05) {
+  let years = 0;
+  let value = currentAssets;
+
+  while (value < targetAssets) {
+    value *= (1 + annualReturn);
+    years++;
+  }
+
+  return years;
+}
