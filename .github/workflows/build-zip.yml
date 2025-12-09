@@ -12,7 +12,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Install zip
+        run: sudo apt-get install -y zip
 
       - name: Create ZIP file
         run: |
@@ -20,7 +23,7 @@ jobs:
           zip -r output/riskman.zip . -x ".git/*" -x ".github/*"
 
       - name: Upload ZIP artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: riskman-zip
           path: output/riskman.zip
