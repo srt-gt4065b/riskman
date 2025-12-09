@@ -114,3 +114,61 @@ function updateDashboardUI(data) {
   document.getElementById("healthStatus").innerText = data.health_flag;
   // 이후 스코어 계산/파이차트 반영은 3단계에서 추가
 }
+
+// ----------------------------------
+// 6) 리스크 점수 계산
+// ----------------------------------
+function calculateScores(data) {
+  const tesla = data.tesla_percent || 0;
+  const free = data.free_cash || 0;
+  const health = data.health_flag || "-";
+  const km = data.running_km || 0;
+
+  const marketScore = Math.max(0, 100 - tesla); // 테슬라 비중 높을수록 점수 낮음
+  const financeScore = free >= 100 ? 100 : free; // 여유자금 100 이상이면 100점
+  const healthScore = health === "좋음" ? 100 : health === "보통" ? 70 : 40;
+  const runScore = Math.min(100, km * 3); // 달린 km × 3 (최대 100점)
+
+  const total = Math.round((marketScore + financeScore + healthScore + runScore) / 4);
+
+  return { marketScore, financeScore, healthScore, runScore, total };
+}
+
+// ----------------------------------
+// 7) UI 업데이트
+// ----------------------------------
+function updateDashboardUI(data) {
+  const scores = calculateScores(data);
+
+  document.getElementById("marketScore").innerText = scores.marketScore + "점";
+  document.getElementById("financeScore").innerText = scores.financeScore + "점";
+  document.getElementById("healthScore").innerText = scores.healthScore + "점";
+  document.getElementById("runScore").innerText = scores.runScore + "점";
+  document.getElementById("totalScore").innerText = scores.total + "점";
+
+  document.getElementById("alertText").innerText =
+    data.tesla_percent > 70 ? "테슬라 비중 과다!" : "안정적입니다.";
+
+  drawAssetChart();
+}
+
+// ----------------------------------
+// 8) 자산 배분 차트
+// ----------------------------------
+function drawAssetChart() {
+  const ctx = document.getElementById("assetChart").getContext("2d");
+
+  new Chart(ctx, {
+    type: "pie",
+    data: {
+      labels: ["부동산", "주식", "현금"],
+      datasets: [{
+        data: [80, 15, 5],
+        backgroundColor: ["#00E5FF", "#0077FF", "#00AA88"]
+      }]
+    },
+    options: {
+      responsive: true,
+    }
+  });
+}
