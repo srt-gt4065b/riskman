@@ -77,3 +77,56 @@ body.dark {
     margin: 12px 0;
     color: #7f8fa6;
 }
+
+.dashboard-container {
+    width: 95%;
+    max-width: 900px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logout-btn {
+    background: #00E5FF;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.score-box {
+    margin: 25px 0;
+    background: #111118;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.total-score {
+    font-size: 3rem;
+    color: #00E5FF;
+    text-shadow: 0 0 12px #00E5FF;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.card {
+    background: #111118;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #1f1f29;
+}
+
+.section-title {
+    margin-top: 40px;
+    color: #00E5FF;
+}
+
