@@ -87,6 +87,8 @@ function loadDashboard() {
       document.getElementById("totalAssets").innerText = data.totalAssets.toLocaleString();
       document.getElementById("riskScore").innerText = data.riskScore;
       document.getElementById("exerciseDays").innerText = data.exercise;
+      document.getElementById("riskMessage").innerText = getRiskMessage(data.riskScore);
+
 
       drawAssetPieChart(data);
     });
