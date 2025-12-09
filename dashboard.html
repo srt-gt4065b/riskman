@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Risk Dashboard</title>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<!-- Firebase 설정 -->
+<script src="firebase.js"></script>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dark" onload="loadDashboardData();">
+
+<div class="dashboard-container">
+
+    <div class="header">
+        <h1 class="title">AI RISK DASHBOARD</h1>
+        <button class="logout-btn" onclick="logout()">로그아웃</button>
+    </div>
+
+    <!-- 종합 점수 영역 -->
+    <div class="score-box">
+        <h2>종합 리스크 점수</h2>
+        <p class="total-score" id="totalScore">--</p>
+    </div>
+
+    <!-- 카드 5개 -->
+    <div class="card-grid">
+
+        <div class="card">
+            <h3>포트폴리오 리스크</h3>
+            <p id="marketScore">--</p>
+        </div>
+
+        <div class="card">
+            <h3>재정 건전성</h3>
+            <p id="financeScore">--</p>
+        </div>
+
+        <div class="card">
+            <h3>건강 상태</h3>
+            <p id="healthScore">--</p>
+        </div>
+
+        <div class="card">
+            <h3>운동량</h3>
+            <p id="runScore">--</p>
+        </div>
+
+        <div class="card">
+            <h3>변동성 경고</h3>
+            <p id="alertText">--</p>
+        </div>
+
+    </div>
+
+    <!-- 자산 배분 차트 -->
+    <h2 class="section-title">자산 배분</h2>
+    <canvas id="assetChart"></canvas>
+
+</div>
+
+<script src="auth.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
