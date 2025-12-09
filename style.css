@@ -1,124 +1,92 @@
-/* 전체 페이지 공통 */
+/* ===========================
+   Hybrid WSU Pro – Global
+=========================== */
+
 body {
+    background: #0d1117;
+    color: #e6edf3;
+    font-family: "Noto Sans KR", sans-serif;
     margin: 0;
     padding: 0;
-    background: #0f172a;
-    font-family: 'Pretendard', sans-serif;
-    color: #e2e8f0;
+}
+
+h1, h2, h3 {
+    font-weight: 600;
+    color: #e6edf3;
 }
 
 .page-container {
-    width: 90%;
-    max-width: 480px;
-    margin: 30px auto;
-    text-align: center;
+    width: 92%;
+    max-width: 900px;
+    margin: auto;
+    padding-top: 25px;
 }
 
-.title {
-    color: #60a5fa;
-    font-size: 26px;
-    margin-bottom: 20px;
-}
+/* ===========================
+   Buttons – WSU Pro
+=========================== */
 
-/* 버튼 */
 .btn {
-    background: #1e293b;
-    color: #e2e8f0;
-    padding: 12px 15px;
-    border: 1px solid #334155;
-    border-radius: 10px;
-    margin: 5px;
-    width: 45%;
+    background: #161b22;
+    border: 1px solid #30363d;
+    color: #e6edf3;
+    padding: 10px 18px;
+    border-radius: 6px;
     cursor: pointer;
+    font-weight: 600;
 }
 
 .btn:hover {
-    background: #334155;
-}
-
-.btn.primary {
-    background: #3b82f6;
-    border: none;
-    color: white;
-}
-
-.btn.primary:hover {
-    background: #2563eb;
+    background: #21262d;
 }
 
 .btn.danger {
-    background: #ef4444;
-    border: none;
-    color: white;
+    background: #7a1f1f;
+    border-color: #aa2f2f;
 }
 
 .btn.danger:hover {
-    background: #dc2626;
+    background: #aa2f2f;
 }
 
-.btn.google {
-    background: #ffffff;
-    color: #111827;
-    width: 80%;
-    margin-top: 10px;
+/* ===========================
+   Cards – Bloomberg Style
+=========================== */
+
+.cards {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
 }
 
-/* 입력 폼 */
-input {
-    width: 85%;
-    padding: 12px;
-    margin: 8px 0;
-    background: #1e293b;
-    border: 1px solid #334155;
-    color: white;
-    border-radius: 10px;
-}
-
-/* 카드 디자인 */
 .card {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(6px);
-    border-radius: 18px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    transition: transform 0.2s ease;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+    flex: 1;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 18px;
 }
 
 .card h3 {
-    color: #90caf9;
-    font-weight: 600;
-    font-size: 18px;
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #8b949e;
 }
 
 .card .value {
-    color: #fff;
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 700;
-    margin-top: 10px;
 }
 
-/* 로그인 화면 전용 */
-.login-container {
-    width: 90%;
-    max-width: 420px;
-    margin: 80px auto;
-    text-align: center;
-}
+/* ===========================
+   Charts – TradingView Style
+=========================== */
 
-.input-group input {
-    width: 90%;
-}
-
-/* 구분선 */
-.divider {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    color: #64748b;
-    font-size: 14px;
+canvas {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 18px;
 }
