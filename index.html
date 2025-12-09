@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professor Kim's Risk Dashboard - Login</title>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+<!-- Firebase 설정 -->
+<script src="firebase.js"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dark">
+
+<div class="login-container">
+
+    <h1 class="title">AI RISK MONITORING</h1>
+    <p class="subtitle">Professor Kim’s Financial Risk Dashboard</p>
+
+    <!-- Email Login Form -->
+    <div class="card">
+        <input id="email" class="input-dark" type="email" placeholder="Email 입력">
+        <input id="password" class="input-dark" type="password" placeholder="Password 입력">
+
+        <button class="btn" onclick="loginEmail()">Email 로그인</button>
+        <button class="btn-outline" onclick="signUpEmail()">회원가입</button>
+    </div>
+
+    <p class="or-text">또는</p>
+
+    <!-- Google Login Button -->
+    <button class="btn-google" onclick="loginWithGoogle()">
+        🔐 Google 계정으로 로그인
+    </button>
+
+</div>
+
+<script src="auth.js"></script>
+
+</body>
+</html>
