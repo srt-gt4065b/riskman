@@ -1,59 +1,39 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Professor Kim's Risk Dashboard - Login</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Risk Monitoring - Login</title>
 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <link rel="stylesheet" href="style.css" />
 
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyCtEQ0vzqnwqMi333dVuZRTVJkTRd_Ho_s",
-    authDomain: "riskman-b5eeb.firebaseapp.com",
-    projectId: "riskman-b5eeb",
-    storageBucket: "riskman-b5eeb.firebasestorage.app",
-    messagingSenderId: "268232529278",
-    appId: "1:268232529278:web:395eef60f64298915d4f2f"
-  };
-  firebase.initializeApp(firebaseConfig);
+    <!-- Firebase v8 -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-  const auth = firebase.auth();
-  const db = firebase.firestore();
-</script>
-
-<link rel="stylesheet" href="style.css">
+    <script src="config.js"></script>
+    <script src="auth.js"></script>
 </head>
-
-<body class="dark">
+<body>
 
 <div class="login-container">
-
     <h1 class="title">AI RISK MONITORING</h1>
-    <p class="subtitle">Professor Kim’s Financial Risk Dashboard</p>
 
-    <!-- Email Login Form -->
-    <div class="card">
-        <input id="email" class="input-dark" type="email" placeholder="Email 입력">
-        <input id="password" class="input-dark" type="password" placeholder="Password 입력">
+    <div class="input-group">
+        <input id="email" type="text" placeholder="이메일 입력" />
+        <input id="password" type="password" placeholder="비밀번호 입력" />
 
-        <button class="btn" onclick="loginEmail()">Email 로그인</button>
-        <button class="btn-outline" onclick="signUpEmail()">회원가입</button>
+        <button onclick="loginEmail()" class="btn primary">Email 로그인</button>
+        <button onclick="signUpEmail()" class="btn">회원가입</button>
     </div>
 
-    <p class="or-text">또는</p>
+    <div class="divider">또는</div>
 
-    <!-- Google Login Button -->
-    <button class="btn-google" onclick="loginWithGoogle()">
+    <button onclick="loginWithGoogle()" class="btn google">
         🔐 Google 계정으로 로그인
     </button>
-
 </div>
-
-<script src="auth.js"></script>
 
 </body>
 </html>
